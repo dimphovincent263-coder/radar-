@@ -159,7 +159,7 @@
         </svg>
         <div class="gauge-value" id="val-empty">--</div>
       </div>
-      <div class="gauge-max">/ 50 seats</div>
+      <div class="gauge-max">/ 20 seats</div>
       <div class="card-footer">Plenty of space available</div>
     </div>
 
@@ -173,7 +173,7 @@
         </svg>
         <div class="gauge-value" id="val-filling">--</div>
       </div>
-      <div class="gauge-max">/ 50 capacity</div>
+      <div class="gauge-max">/ 20 capacity</div>
       <div class="card-footer">Getting busy</div>
     </div>
 
@@ -187,7 +187,7 @@
         </svg>
         <div class="gauge-value" id="val-full">--</div>
       </div>
-      <div class="gauge-max">/ 50 max</div>
+      <div class="gauge-max">/ 20 max</div>
       <div class="card-footer">Capacity reached</div>
     </div>
 
@@ -214,7 +214,7 @@
     // ── CONFIGURATION ──────────────────────────────────────────
     const AUTH_TOKEN = "Ilf-3p_Z1oOPaw2LxqSiDUZl-PETFLbh";  // ← paste your token here
     const BLYNK_HOST = "https://ny3.blynk.cloud";
-    const MAX_CAP    = 50;  // Updated to 50
+    const MAX_CAP    = 20;
     // ───────────────────────────────────────────────────────────
 
     const ARC_LEN = 226;
@@ -240,10 +240,10 @@
     }
 
     function updateDashboard(count) {
-      // Empty always counts down from 50
+      // Empty counts DOWN from 20
       const empty = MAX_CAP - count;
 
-      // Filling always shows current count so gauge is always live
+      // Filling always shows current live count
       const filling = count;
 
       // Update numbers
@@ -256,7 +256,7 @@
       setArc('arc-filling', filling, MAX_CAP);
       setArc('arc-full',    count,   MAX_CAP);
 
-      // Summary
+      // Summary row
       document.getElementById('sum-count').textContent  = count;
       document.getElementById('sum-pct').textContent    = Math.round(count / MAX_CAP * 100) + '%';
       document.getElementById('sum-status').textContent = getStatus(count, MAX_CAP);
@@ -284,7 +284,7 @@
       }
     }
 
-    // Poll every 1 second for near real-time updates
+    // Poll every 1 second
     poll();
     setInterval(poll, 1000);
   </script>
