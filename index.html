@@ -36,11 +36,9 @@
         radial-gradient(ellipse at 80% 90%, rgba(0,200,100,0.05) 0%, transparent 60%);
     }
 
-    /* ── Header ── */
     header {
       text-align: center;
       margin-bottom: 40px;
-      position: relative;
     }
     header::before {
       content: '';
@@ -75,7 +73,6 @@
       letter-spacing: 2px;
     }
 
-    /* ── Status bar ── */
     .status-bar {
       display: flex;
       align-items: center;
@@ -95,12 +92,11 @@
       background: var(--dim);
       transition: background 0.3s;
     }
-    .status-dot.online { background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
+    .status-dot.online  { background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
     .status-dot.offline { background: var(--red); }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
     #status-text { color: var(--dim); }
 
-    /* ── Gauge grid ── */
     .gauges {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -120,7 +116,6 @@
       align-items: center;
       position: relative;
       overflow: hidden;
-      transition: border-color 0.4s, box-shadow 0.4s;
     }
     .card::before {
       content: '';
@@ -128,11 +123,10 @@
       top: 0; left: 0; right: 0;
       height: 3px;
       border-radius: 16px 16px 0 0;
-      transition: background 0.4s;
     }
-    .card.empty::before   { background: var(--green); box-shadow: 0 0 16px var(--green); }
+    .card.empty::before   { background: var(--green);  box-shadow: 0 0 16px var(--green); }
     .card.filling::before { background: var(--orange); box-shadow: 0 0 16px var(--orange); }
-    .card.full::before    { background: var(--red); box-shadow: 0 0 16px var(--red); }
+    .card.full::before    { background: var(--red);    box-shadow: 0 0 16px var(--red); }
 
     .card-title {
       font-size: 11px;
@@ -144,7 +138,6 @@
       align-self: flex-start;
     }
 
-    /* ── SVG Arc Gauge ── */
     .gauge-wrap {
       position: relative;
       width: 160px;
@@ -155,9 +148,9 @@
     .gauge-track { fill: none; stroke: var(--border); stroke-width: 10; stroke-linecap: round; }
     .gauge-fill  { fill: none; stroke-width: 10; stroke-linecap: round;
                    transition: stroke-dashoffset 1s cubic-bezier(.4,0,.2,1), stroke 0.4s; }
-    .card.empty   .gauge-fill { stroke: var(--green); filter: drop-shadow(0 0 6px var(--green)); }
+    .card.empty   .gauge-fill { stroke: var(--green);  filter: drop-shadow(0 0 6px var(--green)); }
     .card.filling .gauge-fill { stroke: var(--orange); filter: drop-shadow(0 0 6px var(--orange)); }
-    .card.full    .gauge-fill { stroke: var(--red);   filter: drop-shadow(0 0 6px var(--red)); }
+    .card.full    .gauge-fill { stroke: var(--red);    filter: drop-shadow(0 0 6px var(--red)); }
 
     .gauge-value {
       position: absolute;
@@ -170,9 +163,9 @@
       color: #fff;
       white-space: nowrap;
     }
-    .card.empty   .gauge-value { color: var(--green); text-shadow: 0 0 20px var(--green); }
+    .card.empty   .gauge-value { color: var(--green);  text-shadow: 0 0 20px var(--green); }
     .card.filling .gauge-value { color: var(--orange); text-shadow: 0 0 20px var(--orange); }
-    .card.full    .gauge-value { color: var(--red);   text-shadow: 0 0 20px var(--red); }
+    .card.full    .gauge-value { color: var(--red);    text-shadow: 0 0 20px var(--red); }
 
     .gauge-max {
       font-family: var(--font-mono);
@@ -192,7 +185,6 @@
       text-align: center;
     }
 
-    /* ── Summary row ── */
     .summary {
       display: flex;
       gap: 16px;
@@ -214,7 +206,6 @@
     .stat-label { font-size: 10px; letter-spacing: 2px; color: var(--dim); font-family: var(--font-mono); margin-bottom: 6px; }
     .stat-value { font-size: 22px; font-weight: 700; font-family: var(--font-mono); color: #fff; }
 
-    /* ── Last updated ── */
     .last-updated {
       font-family: var(--font-mono);
       font-size: 11px;
@@ -222,22 +213,6 @@
       letter-spacing: 1px;
     }
     #last-time { color: var(--blue); }
-
-    /* ── Config notice ── */
-    .config-notice {
-      margin-top: 30px;
-      background: rgba(255,152,0,0.08);
-      border: 1px solid rgba(255,152,0,0.3);
-      border-radius: 10px;
-      padding: 16px 24px;
-      max-width: 920px;
-      width: 100%;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--orange);
-      display: none;
-    }
-    .config-notice.show { display: block; }
   </style>
 </head>
 <body>
@@ -255,8 +230,7 @@
 
   <div class="gauges">
 
-    <!-- EMPTY card -->
-    <div class="card empty" id="card-empty">
+    <div class="card empty">
       <div class="card-title">Empty Seats</div>
       <div class="gauge-wrap">
         <svg viewBox="0 0 160 90" width="160" height="90">
@@ -270,8 +244,7 @@
       <div class="card-footer">Plenty of space available</div>
     </div>
 
-    <!-- FILLING UP card -->
-    <div class="card filling" id="card-filling">
+    <div class="card filling">
       <div class="card-title">Filling Up</div>
       <div class="gauge-wrap">
         <svg viewBox="0 0 160 90" width="160" height="90">
@@ -285,8 +258,7 @@
       <div class="card-footer">Getting busy</div>
     </div>
 
-    <!-- FULL card -->
-    <div class="card full" id="card-full">
+    <div class="card full">
       <div class="card-title">Full / Occupied</div>
       <div class="gauge-wrap">
         <svg viewBox="0 0 160 90" width="160" height="90">
@@ -302,7 +274,6 @@
 
   </div>
 
-  <!-- Summary row -->
   <div class="summary">
     <div class="stat">
       <div class="stat-label">TOTAL OBJECTS</div>
@@ -316,29 +287,19 @@
       <div class="stat-label">STATUS</div>
       <div class="stat-value" id="sum-status">--</div>
     </div>
-    <div class="stat">
-      <div class="stat-label">LAST DISTANCE</div>
-      <div class="stat-value" id="sum-dist">-- cm</div>
-    </div>
   </div>
 
   <div class="last-updated">Last updated: <span id="last-time">--:--:--</span></div>
 
-  <div class="config-notice" id="cfg-notice">
-    ⚠ Replace YOUR_AUTH_TOKEN in the script below with your Blynk Auth Token to see live data.
-  </div>
-
   <script>
-    // ──────────────────────────────────────────────
-    // CONFIGURATION — replace with your details
-    // ──────────────────────────────────────────────
-    const AUTH_TOKEN  = "Ilf-3p_Z1oOPaw2LxqSiDUZl-PETFLbh";   // Paste your Blynk Auth Token here
-    const BLYNK_HOST  = "https://ny3.blynk.cloud"; // Change to your region if needed
-    const MAX_CAP     = 20;
-    const REFRESH_MS  = 5000; // Refresh every 5 seconds
-    // ──────────────────────────────────────────────
+    // ── CONFIGURATION ──────────────────────────────────────────
+    const AUTH_TOKEN = "YOUR_AUTH_TOKEN";  // Paste your Blynk Auth Token here
+    const BLYNK_HOST = "https://ny3.blynk.cloud";
+    const MAX_CAP    = 20;
+    const REFRESH_MS = 5000;
+    // ───────────────────────────────────────────────────────────
 
-    const ARC_LEN = 226; // Half-circle arc length in px
+    const ARC_LEN = 226;
 
     function setArc(id, value, max) {
       const ratio  = Math.min(Math.max(value / max, 0), 1);
@@ -349,7 +310,7 @@
     function setOnline(online) {
       const dot  = document.getElementById('dot');
       const text = document.getElementById('status-text');
-      dot.className  = 'status-dot ' + (online ? 'online' : 'offline');
+      dot.className    = 'status-dot ' + (online ? 'online' : 'offline');
       text.textContent = online ? 'Device Online · Live Data' : 'Device Offline';
     }
 
@@ -368,25 +329,17 @@
     }
 
     async function refresh() {
-      if (AUTH_TOKEN === "YOUR_AUTH_TOKEN") {
-        document.getElementById('cfg-notice').classList.add('show');
-        setOnline(false);
-        return;
-      }
-
       try {
-        // Fetch V1 (count), V2 (empty), V3 (filling), V5 (%), V2 dist
-        const [count, empty, filling, pct, dist] = await Promise.all([
-          fetchPin('v1'),
-          fetchPin('v2'),
-          fetchPin('v3'),
-          fetchPin('v5'),
-          fetchPin('v2') // last distance reuses v2 — change to v2 if you mapped differently
-        ]);
+        // Fetch count from V1
+        const count = await fetchPin('v1');
+
+        // Calculate all values on website side
+        const empty   = MAX_CAP - count;
+        const filling = (count / MAX_CAP * 100 > 40 && count / MAX_CAP * 100 <= 75) ? count : 0;
 
         setOnline(true);
 
-        // Update gauge values
+        // Update gauge numbers
         document.getElementById('val-empty').textContent   = empty;
         document.getElementById('val-filling').textContent = filling;
         document.getElementById('val-full').textContent    = count;
@@ -402,14 +355,12 @@
 
         // Summary row
         document.getElementById('sum-count').textContent  = count;
-        document.getElementById('sum-pct').textContent    = Math.round(pct) + '%';
+        document.getElementById('sum-pct').textContent    = Math.round(count / MAX_CAP * 100) + '%';
         document.getElementById('sum-status').textContent = getStatus(count, MAX_CAP);
-        document.getElementById('sum-dist').textContent   = dist + ' cm';
 
         // Timestamp
         const now = new Date();
-        document.getElementById('last-time').textContent =
-          now.toLocaleTimeString();
+        document.getElementById('last-time').textContent = now.toLocaleTimeString();
 
       } catch (e) {
         setOnline(false);
@@ -417,7 +368,6 @@
       }
     }
 
-    // Start fetching
     refresh();
     setInterval(refresh, REFRESH_MS);
   </script>
